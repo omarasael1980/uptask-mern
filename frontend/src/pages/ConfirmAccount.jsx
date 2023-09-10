@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react" 
 import { useParams, Link } from "react-router-dom"
 import Alerta from "../components/Alerta"
-import clienteAxios from "../../config/clienteAxios"
+import clienteAxios from "../config/clienteAxios"
 const ConfirmAccount = () => {
   const [alerta, setAlerta]= useState({})
   const [cuentaConfirmada, setcuentaConfirmada] = useState(false)
