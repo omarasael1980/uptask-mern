@@ -1,6 +1,7 @@
 import Usuario from '../models/Usuarios.js'
 import generarId from '../helpers/generarId.js'
 import generarJWT from '../helpers/generarJWT.js'
+import {emailRegistro} from '../helpers/email.js'
 
 const registrar = async (req,res)=>{
     //evitar registros duplicados
@@ -14,11 +15,17 @@ const registrar = async (req,res)=>{
         const usuario = new Usuario(req.body)
         usuario.token = generarId()
         const usuarioAlmacenado = await usuario.save()
-        res.json({msg: "Usuario registrado", resultado: usuarioAlmacenado})
-        console.log(usuario)
+            //enviar email de confirmacion
+          emailRegistro({ 
+            email: usuarioAlmacenado.email,
+            nombre: usuarioAlmacenado.nombre,
+            token: usuarioAlmacenado.token
+        })
+        res.json({msg: "Usuario registrado correctamente. Revisa tu correo para confirmar tu cuenta"})
+         
 
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
     
 } 
@@ -71,12 +78,14 @@ const confirmar = async (req, res)=>{
             usuarioConfirmar.token =''
             // guardar base de datos
             await usuarioConfirmar.save()
+        
             // confirmar  exito
-            res.json({msg: 'Usuario Confirmado Correctamente'})
+            res.json(
+                {msg: 'Usuario Confirmado Correctamente'})
 
             
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
             
         }
 }
@@ -98,7 +107,7 @@ const olvidePassword = async (req, res)=>{
         res.json({msg: 'Hemos enviado un correo con las instrucciones para que cambies tu password'})
         
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
      
 }
@@ -133,7 +142,7 @@ const nuevoPassword = async (req, res) => {
        //regresar mensaje de exito
        res.json({msg: 'Contraseña modificada correctamente'})
        } catch (error) {
-        console.log(error)
+        console.log(error.message)
        }
       
     }else{
