@@ -1,14 +1,16 @@
 import  jwt from "jsonwebtoken"
 import Usuario from "../models/Usuarios.js"
 const checkAuth = async (req, res, next)=>{
-    let token
-    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
+    let token 
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){ 
+    
      try {
         // revisar token
         token = req.headers.authorization.split(' ')[1]
+        console.log('check',token)
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         req.usuario = await Usuario.findById(decoded.id).select(
-            '-password -confirmado -createdAt -updatedAt -token -__v')
+            '-password -confirmado -createdAt -updatedAt -token -__v') 
        
             return next()
          
@@ -17,15 +19,12 @@ const checkAuth = async (req, res, next)=>{
      }   
     }
      
-    if(!token){
-        const error = new Error('Token no válido')
-        if(token == null){
-          return res.status(301).json({msg: "No tienes autorización"})
-        }else{
-            return res.status(301).json({msg: error})
-        }
-       
-    }
+    if (!token) {
+      
+        const error = new Error("Token no válido");
+        return res.status(401).json({ msg: error.message });
+      }
+    
     next()
 }
 

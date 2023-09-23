@@ -101,6 +101,7 @@ const Register = () => {
           type="email"
           placeholder="Email de registro"
           name="email"
+          autoComplete="username"
           id="email"
           value={email}
           onChange={e=>setEmail(e.target.value)}
@@ -114,6 +115,7 @@ const Register = () => {
           placeholder="Password de Registro "
           name="password"
           id="password"
+          autoComplete="new-password"
           value={password}
           onChange={e=>setPassword(e.target.value)}
           className="text-xl  w-full mt-3 p-3 border rounded-xl bg-gray-50"
@@ -125,6 +127,7 @@ const Register = () => {
           type="password"
           placeholder="Repite tu password "
           name="password2"
+          autoComplete="new-password"
           id="password2"
           value={repeatPassword}
           onChange={e=>setRepeatPassword(e.target.value)}

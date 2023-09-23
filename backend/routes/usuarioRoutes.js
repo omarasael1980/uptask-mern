@@ -12,6 +12,7 @@ import {registrar,
     } from '../controllers/usuarioController.js'
 
 import checkAuth from '../middleware/checkAuth.js';
+
 router.get('/', (req,res)=>{
     res.send("Desde usuarios")
 })
