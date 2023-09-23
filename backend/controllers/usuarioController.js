@@ -8,7 +8,7 @@ const registrar = async (req,res)=>{
     const{email} = req.body
     const existeUsuario = await Usuario.findOne({email: email})
    if(existeUsuario){
-    const error = new Error("El usuario ya existe")
+    const error = new Error("El usuario ya existe");
     return res.status(400).json({msg: error.message})
    }
     try {
