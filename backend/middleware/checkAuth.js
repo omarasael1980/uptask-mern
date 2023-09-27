@@ -13,7 +13,7 @@ const checkAuth = async (req, res, next)=>{
             '-password -confirmado -createdAt -updatedAt -token -__v') 
        
             //console.log(req.usuario)
-            return next()
+            return next() 
          
      } catch (error) {
         return res.status(404).json({msg: 'Hubo un error'})
