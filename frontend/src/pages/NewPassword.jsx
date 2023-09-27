@@ -109,6 +109,7 @@ const newPassword = () => {
               onChange={e=>setpassword(e.target.value)}
               value={password}
               id="password"
+              autoComplete="newPassword"
               className="text-xl  w-full mt-3 p-3 border rounded-xl bg-gray-50"
             />
           </div>
@@ -118,6 +119,7 @@ const newPassword = () => {
               type="password"
               placeholder="Repite tu password "
               name="password2"
+              autoComplete="new-password"
               onChange={e=>setCPassword(e.target.value)}
               value={cpassword}
               id="password2"
