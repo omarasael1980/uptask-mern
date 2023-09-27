@@ -7,11 +7,12 @@ const checkAuth = async (req, res, next)=>{
      try {
         // revisar token
         token = req.headers.authorization.split(' ')[1]
-        console.log('check',token)
+        //console.log('check',token)
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         req.usuario = await Usuario.findById(decoded.id).select(
             '-password -confirmado -createdAt -updatedAt -token -__v') 
        
+            //console.log(req.usuario)
             return next()
          
      } catch (error) {

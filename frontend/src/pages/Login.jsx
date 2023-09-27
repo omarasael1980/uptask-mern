@@ -3,11 +3,14 @@ import { Link, useNavigate } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/clienteAxios"
 import useAuth from "../hooks/useAuth"
+ 
 const login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [alerta, setAlerta] = useState({})
-  const {  setAuth} = useAuth()
+  const { auth, setAuth, cargando} = useAuth()
+  const navigate = useNavigate()
+  
   const handleSubmit = async e =>{
     e.preventDefault()
     if([email, password].includes('')){
@@ -19,6 +22,7 @@ const login = () => {
     }
 
     try {
+      //se extrae el data de la consulta
       const {data} = await clienteAxios.post('/usuarios/login', {email, password})
        
       //limpiarAlertas
@@ -31,7 +35,13 @@ const login = () => {
         msg: `Bienvenido ${data.nombre}`,
         error:false
       })
-      
+    setTimeout(()=>{
+      navigate('/proyectos');
+      setAlerta({})
+
+
+    },3000)
+    
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,

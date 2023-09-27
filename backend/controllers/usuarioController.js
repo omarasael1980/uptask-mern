@@ -11,7 +11,7 @@ const registrar = async (req,res)=>{
     const error = new Error("El usuario ya existe");
     return res.status(400).json({msg: error.message})
    }
-    try {
+    try { 
         const usuario = new Usuario(req.body)
         usuario.token = generarId()
         const usuarioAlmacenado = await usuario.save()
