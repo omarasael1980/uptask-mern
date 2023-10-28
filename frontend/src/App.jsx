@@ -10,6 +10,7 @@ import NuevoProyecto from "./pages/NuevoProyecto"
 import Proyecto from "./pages/Proyecto"
 import RutaProtegida from "./layouts/RutaProtegida"
 import EditarProyecto from "./pages/EditarProyecto"
+import NuevoColaborador from "./pages/NuevoColaborador"
 import { AuthProvider } from "./context/AuthProvider"
 import { ProyectosProvider } from "./context/ProyectosProvider"
 
@@ -49,6 +50,10 @@ function App() {
                             path="crear-proyecto" 
                             element={<NuevoProyecto/>}
                             />
+                            <Route 
+                            path="agregar-colaborador/:id" 
+                            element={<NuevoColaborador/>}
+                            /> 
                       <Route path=":id"  element={<Proyecto/>} />
                       <Route path="editar/:id"  element={<EditarProyecto/>} />
                   </Route>

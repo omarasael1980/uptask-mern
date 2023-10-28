@@ -54,9 +54,9 @@ const FormularioProyecto = () => {
     
         <form 
             onSubmit={handleSubmit}
-            className="text-textSecondary bg-background py-10 px-5 md:w-1/2 rounded-lg ">
+            className="text-textSecondary bg-background   w-full  md:w-1/2 rounded-lg ">
                 {msg && <Alerta alerta = {alerta}/>}
-            <div className="mb-5">
+            <div className="mb-5"  >
                 <label 
                     className="text-primary uppercase font-bold text-sm"
                     htmlFor="nombre">

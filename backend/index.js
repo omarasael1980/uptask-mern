@@ -35,6 +35,80 @@ app.use('/api/tareas',tareaRoutes )
 //asignar variable de puerto produccion | desarollo
 const PORT = process.env.PORT || 4000
 //se abre servidor en el puerto 4000
-app.listen(PORT, ()=>{
+const servidor = app.listen(PORT, ()=>{
     console.log(`Servidor corriendo en el puerto ${PORT}`)
 })
+//socket io
+import {Server} from 'socket.io'
+const io = new Server(servidor, 
+    {   pingTimeout:60000,
+        cors:{
+            origin: process.env.FRONTEND_URL,
+        },
+})
+io.on("connection", (socket) => {
+        // Registrarse en la sala  al abrir un proyecto
+        socket.on("abrir proyecto",(proyecto)=>{
+           
+            //console.log("Desde Proyecto" ,idProyecto )
+            socket.join(proyecto )
+           
+        })
+        socket.on("nueva tarea", (tarea) => {
+         
+        const proyecto = tarea.proyectoAsociado;
+      
+         socket.to(proyecto).emit("tarea agregada", tarea);
+        });
+        socket.on("eliminar tarea", (tarea)=>{
+             
+            const proyecto = tarea.proyectoAsociado;
+            
+            socket.to(proyecto).emit("tarea eliminada", tarea)
+        })
+        socket.on("editar tarea", (tarea) => {
+              
+              const proyecto = tarea.proyectoAsociado._id;
+               
+              socket.to(proyecto).emit("tarea actualizada", tarea);
+             });
+
+        socket.on("cambiar estado", estado=>{
+             
+            const proyecto = estado.proyectoAsociado._id;
+            
+            socket.to(proyecto).emit("estado actualizado", estado)
+        })
+
+   
+    })
+
+ 
+    // Definir los eventos de socket io
+    // socket.on("abrir proyecto", (proyecto) => {
+    //   socket.join(proyecto);
+    // });
+  
+    // socket.on("nueva tarea", (tarea) => {
+         
+    //   const proyecto = tarea.proyectoAsociado;
+      
+    //   socket.to(proyecto).emit("tarea agregada", tarea);
+    // });
+  
+    // socket.on("eliminar tarea", (tarea) => {
+    //   const proyecto = tarea.proyectoAsociado;
+    //   socket.to(proyecto).emit("tarea eliminada", tarea);
+    // });
+  
+    // socket.on("actualizar tarea", (tarea) => {
+    //   const proyecto = tarea.proyectoAsociado._id;
+    //   socket.to(proyecto).emit("tarea actualizada", tarea);
+    // });
+  
+    // socket.on("cambiar estado", (tarea) => {
+    //   const proyecto = tarea.proyectoAsociado._id;
+    //   socket.to(proyecto).emit("nuevo estado", tarea);
+    // });
+ 
+  

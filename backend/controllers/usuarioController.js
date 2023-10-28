@@ -151,7 +151,7 @@ const nuevoPassword = async (req, res) => {
        res.json({msg: 'Contraseña modificada correctamente'})
        } catch (error) {
         console.log(error.message)
-       }
+       }  
       
     }else{
         const error = new Error('El token no es válido')

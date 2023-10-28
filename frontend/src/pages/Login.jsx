@@ -37,6 +37,7 @@ const login = () => {
       })
     setTimeout(()=>{
       navigate('/proyectos');
+      
       setAlerta({})
 
 

@@ -24,7 +24,7 @@ const EditarProyecto = () => {
   }
   return cargando ? (
     //mientras carga se ve animacion
-    <div className="bg-background rounded-lg flex-1">
+    <div className="bg-background rounded-lg  w-full flex-1">
       <button
         type="button"
         className="  text-completedTask font-bold  items-center text-5xl text-center
@@ -40,10 +40,10 @@ const EditarProyecto = () => {
       </button>
     </div>
   ) : (
-    <div className="bg-background rounded-lg p-10  ">
-      <div className="bg-background rounded-lg p-10 flex justify-between">
+    <div className="bg-background w-full flex flex-col md: flex-row rounded-lg p-10  ">
+      <div className="bg-background rounded-lg p-10 w-full flex justify-between">
         <h1 className="font-black text-4xl uppercase">{`Editando Proyecto: ${nombre}`}</h1>
-        <div className="flex items-center gap-4 font-bold text-textSecondary hover:text-completedTask ">
+        <div className="flex items-center  w-full gap-4 font-bold text-textSecondary hover:text-completedTask ">
           {" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ const EditarProyecto = () => {
         </div>
       </div>
 
-      <div className="mt-10 flex justify-center">
+      <div className="mt-10 flex  w-full  justify-center">
    
         <FormularioProyecto />
       </div>

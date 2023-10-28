@@ -25,6 +25,7 @@ export default {
       indigo: '#4B0082',
       chocolate: '#D2691E',
       plum: '#DDA0DD',
+      red:'#8B0000',
     },
 
   },

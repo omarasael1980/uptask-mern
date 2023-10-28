@@ -9,15 +9,15 @@ const tareaSchema = mongoose.Schema({
         type: String,
         trim: true,
         required: true
-    },
-    estado: {
-        type: Boolean,
+    }, 
+    estado: {   
+        type: Boolean,  
         default: false
-    },
-    fechaEntrega: {
+    },     
+    fechaEntrega: {   
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now()   
     },
     prioridad: {
         type: String,
@@ -28,11 +28,15 @@ const tareaSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref:"Proyecto"
     },
+    completado:{
+        type: mongoose.Schema.ObjectId,
+        ref:"Usuario"
+    },
 
 
 },
 {
-    Timestamps:true,
+    Timestamps:true, 
 })
 const Tarea  =  mongoose.model('Tarea', tareaSchema)
 export default Tarea
